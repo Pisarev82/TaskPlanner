@@ -1,34 +1,41 @@
 package org.example;
 
 import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.TimeZone;
+
 
 public class Main {
 
     public static void main(String[] args) {
-        long now = getTimeStamp();
+        // Следующая строка кода рабочая, но с ней не интересно. Она нужна когда системное время отличается, от требуемого пользователем.
+        // SetUserZoneID.setZone("America/Los_Angeles");
 
-        System.out.println("Hello world!  \n" + now +"\n" );
-        Instant instant = Instant.ofEpochSecond(now);
-        System.out.println(instant);
-        Instant instant1 = Instant.EPOCH.plus(getTimeStamp(), ChronoUnit.SECONDS);
-        TimeZone tz = TimeZone.getTimeZone("Europe/Moscow");
-        ZoneId zone = ZoneId.of("Europe/Moscow");
-        ZonedDateTime time = ZonedDateTime.ofInstant(instant, zone);
-        ZonedDateTime time1 = ZonedDateTime.ofInstant(instant1, zone);
-        System.out.println(time);
-        System.out.println(time1);
-        Task task = new Task(1, "Николай");
-        Task task1 = new Task(2, 24, "Николай");
-        System.out.println(task + " " + task);
-    }
+        System.out.println("Ваш часовой пояс: " + SetUserZoneID.getZone() +" сейчас: " + SetUserZoneID.getTime(Instant.now().getEpochSecond()));
 
-    static long getTimeStamp() {
-        long now = Instant.now().getEpochSecond();
-        return now;
+
+        TasksStorage tasksStorage = new TasksStorage("test.json");
+        /*
+        Реализация функционала по дабовлению задач не входило в ТЗ.
+        Да и не интересно писать очередной консольный ввод.
+         */
+        tasksStorage.addTask("Николай", 2);
+        tasksStorage.addTask(8,"Николай", 1);
+        /*
+        Проверка основного функционала
+         */
+        tasksStorage.printTasks();
+        tasksStorage.saveToFile();
+        System.out.println("-----------------");
+        tasksStorage.sortByPrioriti();
+        tasksStorage.printTasks();
+        System.out.println("-----------------");
+        tasksStorage.sortByDeadLine();
+        tasksStorage.printTasks();
+        System.out.println("-----------------");
+        tasksStorage.deleteTaskById(15);
+        tasksStorage.printTasks();
+
+        System.out.println("Ваш часовой пояс: " + SetUserZoneID.getZone() +" сейчас: " + SetUserZoneID.getTime(Instant.now().getEpochSecond()));
+
     }
 }
 
