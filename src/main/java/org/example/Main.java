@@ -16,10 +16,6 @@ public class Main {
         /*
         Реализация функционала по дабовлению задач не входило в ТЗ.
         Да и не интересно писать очередной консольный ввод.
-         */
-        tasksStorage.addTask("Николай", 2);
-        tasksStorage.addTask(8,"Николай", 1);
-        /*
         Проверка основного функционала
          */
         tasksStorage.printTasks();
@@ -36,6 +32,10 @@ public class Main {
 
         System.out.println("Ваш часовой пояс: " + SetUserZoneID.getZone() +" сейчас: " + SetUserZoneID.getTime(Instant.now().getEpochSecond()));
 
+        TaskBuilder tb = new TaskBuilder();
+        Task taskX = tb.setAuthor("").setPRIORITI_LEVEL(1).creatTask();
+        tasksStorage.addTask(taskX);
+        System.out.println(taskX);
     }
 }
 

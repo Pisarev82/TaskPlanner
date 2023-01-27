@@ -15,11 +15,8 @@ public class TasksStorage {
         this.taskArrayList = readJson.readJson();
     }
 
-    public void  addTask(String author, int prioritiLevel) {
-        taskArrayList.add(new Task(author, prioritiLevel));
-    }
-    public void  addTask(int deadLine, String author, int prioritiLevel) {
-        taskArrayList.add(new Task(deadLine, author, prioritiLevel));
+    public void  addTask(Task task) {
+        taskArrayList.add(task);
     }
 
     public void saveToFile() {

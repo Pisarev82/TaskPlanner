@@ -13,17 +13,13 @@ public class Task {
     private final String author;
 
 
-    public Task(String author, int PRIORITI_LEVEL) {
+    public Task (TaskBuilder taskBuilder) {
         this.id = nextId.incrementAndGet();
         this.addedMoment = creationTimeStamp();
-        this.author = author;
-        this.PRIORITI_LEVEL = PRIORITI_LEVEL;
-    }
-
-    public Task(int deadlineInHour, String author, int PRIORITI_LEVEL) {
-        this(author, PRIORITI_LEVEL);
-        this.deadLine = (long)deadlineInHour*3600 + addedMoment;
-    }
+        this.author = taskBuilder.getAuthor();
+        this.deadLine = (long)taskBuilder.getTimeUntillDeadLine()*3600 + addedMoment;
+        this.PRIORITI_LEVEL = taskBuilder.getPRIORITI_LEVEL();
+    };
 
 
     private long creationTimeStamp() {

@@ -23,7 +23,6 @@ public class ReadJson {
         }.getType();
     }
 
-
     public ArrayList<Task> readJson () {
         Gson gson1 = new Gson();
         JsonReader reader;
